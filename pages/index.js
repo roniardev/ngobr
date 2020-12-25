@@ -58,12 +58,38 @@ const App = ({ post, csrf }) => {
   return (
     <>
       <Head>
+        <title>Ngobr - Cari dan kasih rekomendasi topik obrolan.</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link
+          rel="icon"
+          href="/images/favicon.png"
+          sizes="16x16 32x32"
+          type="image/png"
+        />
+        <meta
+          name="description"
+          content="Cari dan kasih rekomendasi topik obrolan."
+        />
+        <meta
+          property="og:title"
+          content="Ngobr - Cari dan kasih rekomendasi topik obrolan."
+        />
+        <meta
+          property="og:description"
+          content="Cari dan kasih rekomendasi topik obrolan."
+        />
+        <meta property="og:site_name" content="Ngobr" />
+        <meta property="og:locale" content="id" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ngobr.evl.pink" />
+        <meta property="og:image" content="/images/og-image.png" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
           rel="stylesheet"
         />
       </Head>
+
       <If condition={visMain && isClose}>
         <Then>
           {' '}
@@ -81,6 +107,15 @@ const App = ({ post, csrf }) => {
               <Button isPrimary onClick={() => nextQuote()}>
                 <span tw="text-lg md:text-xl py-2 font-medium">Ganti</span>
               </Button>
+            </div>
+            <div tw="container text-lg text-center font-medium mb-6">
+              ©️ 2020 Dibuat oleh{' '}
+              <a
+                href="https://ron.my.id"
+                tw="font-bold text-green-600 hover:text-green-800"
+              >
+                Ron
+              </a>{' '}
             </div>
           </div>
         </Then>
