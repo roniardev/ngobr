@@ -5,6 +5,8 @@ import Head from 'next/head'
 import { If, Else, Then } from 'react-if'
 import { createClient } from '@supabase/supabase-js'
 import create from 'zustand'
+import Cookies from 'cookies'
+import { randomBytes } from 'crypto'
 
 const useStore = create((set) => ({
   visMain: true,
@@ -15,22 +17,29 @@ const useStore = create((set) => ({
   toggleModal: () => set((state) => ({ visModal: !state.visModal }))
 }))
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ req, res }) {
   const supabaseUrl = process.env.SUPABASE_URL
   const supabaseKey = process.env.SUPABASE_KEY
   const supabase = await createClient(supabaseUrl, supabaseKey)
+  const cookies = new Cookies(req, res)
+  const csrf = randomBytes(100).toString('base64')
+
+  cookies.set('csrf', csrf, {
+    httpOnly: true // true by default
+  })
 
   const data = await supabase.from('ngobrolin_data').select('quote')
 
   let post = data
   return {
     props: {
-      post
+      post,
+      csrf
     }
   }
 }
 
-const App = ({ post }) => {
+const App = ({ post, csrf }) => {
   const visMain = useStore((state) => state.visMain)
   const visModal = useStore((state) => state.visModal)
   const isClose = useStore((state) => state.isClose)
@@ -83,6 +92,7 @@ const App = ({ post }) => {
             toggleModal={toggleModal}
             toggleClose={toggleClose}
             toggleMain={toggleMain}
+            csrf={csrf}
           />
         </Else>
       </If>

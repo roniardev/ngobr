@@ -18,14 +18,16 @@ const Modal = (props) => {
   } = useForm()
   const onSubmit = async (data) => {
     const quote = getValues('quote')
+    const csrf = getValues('csrf')
     axios({
       method: 'post',
       url: '/api',
       data: {
-        quote: quote
+        quote: quote,
+        csrf: csrf
       }
     }).then(() => {
-      toast.success('topik berhasil ditambah')
+      toast.success('Topik obrolan berhasil ditambah')
     })
   }
   return (
@@ -53,6 +55,13 @@ const Modal = (props) => {
                         <label tw="font-bold text-base text-gray-900 text-lg md:text-xl">
                           Ngobrolin...
                         </label>
+                        <input
+                          type="hidden"
+                          name="csrf"
+                          id="csrf"
+                          value={props.csrf}
+                          ref={register({ required: true })}
+                        />
                         <input
                           name="quote"
                           id="quote"
