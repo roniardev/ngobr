@@ -3,7 +3,7 @@ import tw from 'twin.macro'
 import { Button, Modal } from '@/components/'
 import Head from 'next/head'
 import { If, Else, Then } from 'react-if'
-import { createClient } from '@supabase/supabase-js'
+import axios from 'axios'
 import create from 'zustand'
 import Cookies from 'cookies'
 import { randomBytes } from 'crypto'
@@ -20,9 +20,6 @@ const useStore = create((set) => ({
 }))
 
 export async function getServerSideProps({ req, res }) {
-  const supabaseUrl = process.env.SUPABASE_URL
-  const supabaseKey = process.env.SUPABASE_KEY
-  const supabase = await createClient(supabaseUrl, supabaseKey)
   const cookies = new Cookies(req, res)
   const csrf = randomBytes(100).toString('base64')
 
@@ -30,9 +27,9 @@ export async function getServerSideProps({ req, res }) {
     httpOnly: true // true by default
   })
 
-  const data = await supabase.from('ngobrolin_data').select('quote')
-
-  let post = data
+  let post = await axios.get('/api').then((response) => {
+    return response.data
+  })
   return {
     props: {
       post,
@@ -58,6 +55,7 @@ const App = ({ post, csrf }) => {
   const nextQuote = () => {
     let index = post.data.length - 1
     setIndex(Math.floor(Math.random() * index))
+    console.log(post)
   }
   const switchTheme = () => {
     if (isMounted) {
@@ -119,9 +117,9 @@ const App = ({ post, csrf }) => {
             </div>
             <div tw="flex flex-col justify-center h-full space-y-8 items-center w-3/5 ">
               <section tw="flex flex-row space-x-4 items-center">
-                <div tw="capitalize font-semibold text-xl md:text-3xl border-2 py-4 px-2 border-green-600 shadow-md dark:text-white">
+                <h1 tw="capitalize font-semibold text-xl md:text-3xl border-2 py-4 px-2 border-green-600 shadow-md dark:text-white">
                   "{post.data[quoteIndex].quote}"
-                </div>
+                </h1>
                 <Button onClick={toggleMain}>
                   <span tw="dark:text-white">+</span>
                 </Button>
