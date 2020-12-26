@@ -34,7 +34,7 @@ const Modal = (props) => {
     <>
       <If condition={props.visModal === false || props.isClose === true}>
         <Then>
-          <div tw="px-2 py-4 items-center justify-center">
+          <div tw="px-2 items-center justify-center dark:bg-black">
             <main
               tw="container items-center justify-center antialiased text-gray-900 font-sans overflow-x-auto"
               className="font-public"

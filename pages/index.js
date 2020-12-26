@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import tw from 'twin.macro'
 import { Button, Modal } from '@/components/'
 import Head from 'next/head'
@@ -7,6 +7,8 @@ import { createClient } from '@supabase/supabase-js'
 import create from 'zustand'
 import Cookies from 'cookies'
 import { randomBytes } from 'crypto'
+import { useTheme } from 'next-themes'
+import { Moon, Sun } from '@/components/icons'
 
 const useStore = create((set) => ({
   visMain: true,
@@ -40,6 +42,9 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const App = ({ post, csrf }) => {
+  const { theme, setTheme } = useTheme()
+  const [isMounted, setIsMounted] = useState(false)
+
   const visMain = useStore((state) => state.visMain)
   const visModal = useStore((state) => state.visModal)
   const isClose = useStore((state) => state.isClose)
@@ -54,7 +59,15 @@ const App = ({ post, csrf }) => {
     let index = post.data.length - 1
     setIndex(Math.floor(Math.random() * index))
   }
+  const switchTheme = () => {
+    if (isMounted) {
+      setTheme(theme === 'light' ? 'dark' : 'light')
+    }
+  }
 
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
   return (
     <>
       <Head>
@@ -94,25 +107,34 @@ const App = ({ post, csrf }) => {
         <Then>
           {' '}
           <div
-            css={[tw`flex flex-col items-center justify-center h-screen`]}
+            css={[
+              tw` flex flex-col items-center justify-center h-screen dark:bg-black`
+            ]}
             className="font-public"
           >
+            <div tw="text-lg font-medium mt-6 dark:text-white transform transition duration-500 ease-in-out hover:scale-105  hover:-translate-y-1 hover:text-yellow-400">
+              <button onClick={switchTheme}>
+                {theme === 'light' ? <Moon /> : <Sun />}
+              </button>
+            </div>
             <div tw="flex flex-col justify-center h-full space-y-8 items-center w-3/5 ">
               <section tw="flex flex-row space-x-4 items-center">
-                <div tw="capitalize font-semibold text-xl md:text-3xl border-2 py-4 px-2 border-green-600 shadow-md">
+                <div tw="capitalize font-semibold text-xl md:text-3xl border-2 py-4 px-2 border-green-600 shadow-md dark:text-white">
                   "{post.data[quoteIndex].quote}"
                 </div>
-                <Button onClick={toggleMain}>+</Button>
+                <Button onClick={toggleMain}>
+                  <span tw="dark:text-white">+</span>
+                </Button>
               </section>
               <Button isPrimary onClick={() => nextQuote()}>
                 <span tw="text-lg md:text-xl py-2 font-medium">Ganti</span>
               </Button>
             </div>
-            <div tw="container text-lg text-center font-medium mb-6">
+            <div tw=" text-lg text-center font-medium mb-6 dark:text-white">
               ©️ 2020 Dibuat oleh{' '}
               <a
                 href="https://ron.my.id"
-                tw="font-bold text-green-600 hover:text-green-800"
+                tw="font-bold text-green-600 hover:text-green-800 dark:text-green-300 dark:hover:text-green-200"
               >
                 Ron
               </a>{' '}

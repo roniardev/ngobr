@@ -1,12 +1,13 @@
 import { GlobalStyles } from 'twin.macro'
 import GlobalFonts from '@/components/fonts'
+import { ThemeProvider } from 'next-themes'
 
 const App = ({ Component, pageProps }) => (
-  <div>
+  <ThemeProvider attribute="class">
     <GlobalStyles />
     <GlobalFonts />
     <Component {...pageProps} />
-  </div>
+  </ThemeProvider>
 )
 
 export default App
