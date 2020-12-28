@@ -21,6 +21,8 @@ yarn
 
 ## Usage
 
+**Provide .env and .env.local for SUPABASE_URL and SUPABASE_KEY
+
 ```sh
 yarn build && yarn start
 ```
