@@ -1,9 +1,10 @@
 import { createClient } from '@supabase/supabase-js'
 import { randomBytes } from 'crypto'
 
+const supabaseUrl = process.env.SUPABASE_URL
+const supabaseKey = process.env.SUPABASE_KEY
+
 export default async function handler(req, res) {
-  const supabaseUrl = process.env.SUPABASE_URL
-  const supabaseKey = process.env.SUPABASE_KEY
   const supabase = await createClient(supabaseUrl, supabaseKey)
   if (req.cookies.csrf === undefined) {
     req.cookies.csrf = randomBytes(100).toString('base64')

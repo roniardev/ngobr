@@ -21,7 +21,7 @@ const Modal = (props) => {
     const csrf = getValues('csrf')
     axios({
       method: 'post',
-      url: '/api',
+      url: 'https://ngobr.vercel.app/api',
       data: {
         quote: quote,
         csrf: csrf

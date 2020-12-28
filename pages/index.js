@@ -27,9 +27,8 @@ export async function getServerSideProps({ req, res }) {
     httpOnly: true // true by default
   })
 
-  let post = await axios.get('/api').then((response) => {
-    return response.data
-  })
+  const data = await fetch(`https://ngobr.vercel.app/api`)
+  const post = await data.json()
   return {
     props: {
       post,
