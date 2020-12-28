@@ -22,12 +22,13 @@ const useStore = create((set) => ({
 export async function getServerSideProps({ req, res }) {
   const cookies = new Cookies(req, res)
   const csrf = randomBytes(100).toString('base64')
+  res.setHeader('Cache-Control', 'no-cache')
 
   cookies.set('csrf', csrf, {
     httpOnly: true // true by default
   })
 
-  const data = await fetch(`https://ngobr.vercel.app/api`)
+  const data = await fetch(`https://ngobr.evl.pink/api`)
   const post = await data.json()
   return {
     props: {
@@ -54,7 +55,6 @@ const App = ({ post, csrf }) => {
   const nextQuote = () => {
     let index = post.data.length - 1
     setIndex(Math.floor(Math.random() * index))
-    console.log(post)
   }
   const switchTheme = () => {
     if (isMounted) {
@@ -110,7 +110,7 @@ const App = ({ post, csrf }) => {
             className="font-public"
           >
             <div tw="text-lg font-medium mt-6 dark:text-white transform transition duration-500 ease-in-out hover:scale-105  hover:-translate-y-1 hover:text-yellow-400">
-              <button onClick={switchTheme}>
+              <button onClick={switchTheme} aria-label="dark-switcher">
                 {theme === 'light' ? <Moon /> : <Sun />}
               </button>
             </div>
@@ -119,7 +119,7 @@ const App = ({ post, csrf }) => {
                 <h1 tw="capitalize font-semibold text-xl md:text-3xl border-2 py-4 px-2 border-green-600 shadow-md dark:text-white">
                   "{post.data[quoteIndex].quote}"
                 </h1>
-                <Button onClick={toggleMain}>
+                <Button onClick={toggleMain} aria-label="add-quote">
                   <span tw="dark:text-white">+</span>
                 </Button>
               </section>

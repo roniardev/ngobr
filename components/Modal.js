@@ -21,13 +21,14 @@ const Modal = (props) => {
     const csrf = getValues('csrf')
     axios({
       method: 'post',
-      url: 'https://ngobr.vercel.app/api',
+      url: 'https://ngobr.evl.pink/api',
       data: {
         quote: quote,
         csrf: csrf
       }
     }).then(() => {
       toast.success('Topik obrolan berhasil ditambah')
+      window.location.reload()
     })
   }
   return (
