@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "commit" : "git-cz"
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.1.2",
@@ -27,6 +28,13 @@
     "zustand": "^3.2.0"
   },
   "devDependencies": {
+    "commitizen": "^4.2.3",
+    "cz-conventional-changelog": "3.3.0",
     "file-loader": "^6.2.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
