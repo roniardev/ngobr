@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     res.send(JSON.stringify(req.body))
   }
   if (req.method === 'GET') {
-    const content = await supabase.from('ngobrolin_data').select('quote')
+    const content = await supabase.from('ngobrolin_data').select('quote').eq('is_approved', true)
     res.setHeader('Cache-Control', 'no-cache')
     res.setHeader('Content-Type', 'application/json')
     res.send(JSON.stringify({ data: content.data }))
