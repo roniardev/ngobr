@@ -8,7 +8,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "commit" : "git-cz"
+    "commit": "git-cz"
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.1.2",
@@ -16,6 +16,7 @@
     "cookies": "^0.8.0",
     "crypto": "^1.0.1",
     "next": "latest",
+    "next-iron-session": "^4.1.12",
     "next-themes": "^0.0.10",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -30,6 +31,7 @@
   "devDependencies": {
     "commitizen": "^4.2.3",
     "cz-conventional-changelog": "3.3.0",
+    "eslint": "^7.23.0",
     "file-loader": "^6.2.0"
   },
   "config": {

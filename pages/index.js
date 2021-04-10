@@ -22,7 +22,6 @@ const useStore = create((set) => ({
 export async function getServerSideProps({ req, res }) {
   const cookies = new Cookies(req, res)
   const csrf = randomBytes(100).toString('base64')
-  res.setHeader('Cache-Control', 'no-cache')
 
   cookies.set('csrf', csrf, {
     httpOnly: true // true by default
