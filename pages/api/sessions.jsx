@@ -26,8 +26,10 @@ export default withIronSession(
       return res.status(403).send('login Gagal')
     }
 
-    if (req.method === 'DEL') {
+    if (req.method === 'DELETE') {
       req.session.destroy()
+      res.setHeader('cache-control', 'no-store, max-age=0')
+      return res.status(201).send('')
     }
 
     return res.status(404).send('Not Found')

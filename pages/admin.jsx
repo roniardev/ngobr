@@ -7,7 +7,7 @@ import { Button } from '@/components/'
 
 const AdminPage = ({ user }) => {
   const handleLogout = () => {
-    fetch('/api/sessions', { method: 'DEL' })
+    fetch('/api/sessions', { method: 'DELETE' })
     Router.push('/auth')
   }
   return (
