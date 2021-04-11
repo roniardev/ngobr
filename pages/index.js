@@ -27,7 +27,7 @@ export async function getServerSideProps({ req, res }) {
     httpOnly: true // true by default
   })
 
-  const data = await fetch(`https://ngobr.evl.pink/api`)
+  const data = await fetch('https://ngobr.evl.pink/api')
   const post = await data.json()
   return {
     props: {
