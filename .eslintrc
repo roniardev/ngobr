@@ -1,0 +1,12 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "format_on_save": true,
+  },
+  "rules": {},
+}
+
