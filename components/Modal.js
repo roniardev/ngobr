@@ -19,9 +19,10 @@ const Modal = (props) => {
   const onSubmit = async (data) => {
     const quote = getValues('quote')
     const csrf = getValues('csrf')
+    const quote_by = getValues('quote_by')
     axios({
       method: 'post',
-      url: 'https://ngobr.evl.pink/api',
+      url: '/api',
       data: {
         quote: quote,
         csrf: csrf

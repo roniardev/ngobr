@@ -122,12 +122,13 @@ const App = ({ post, csrf }) => {
                   <span tw="dark:text-white">+</span>
                 </Button>
               </section>
+                  <p tw="text-base md:text-lg dark:text-white"><b> Saran dari : </b> {post.data[quoteIndex].quote_by}</p>
               <Button isPrimary onClick={() => nextQuote()}>
                 <span tw="text-lg md:text-xl py-2 font-medium">Ganti</span>
               </Button>
             </div>
             <div tw=" text-lg text-center font-medium mb-6 dark:text-white">
-              ©️ 2020 Dibuat oleh{' '}
+              ©️ 2021 Dibuat oleh{' '}
               <a
                 href="https://ron.my.id"
                 tw="font-bold text-green-600 hover:text-green-800 dark:text-green-300 dark:hover:text-green-200"
