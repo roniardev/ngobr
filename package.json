@@ -11,10 +11,13 @@
     "commit": "git-cz"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "@supabase/supabase-js": "^1.1.2",
     "axios": "^0.21.1",
     "cookies": "^0.8.0",
     "crypto": "^1.0.1",
+    "material-table": "^1.69.3",
     "next": "latest",
     "next-iron-session": "^4.1.12",
     "next-themes": "^0.0.10",
@@ -23,6 +26,7 @@
     "react-hook-form": "^6.13.1",
     "react-hot-toast": "^1.0.1",
     "react-if": "^4.0.1",
+    "react-table": "^7.6.3",
     "styled-components": "^5.2.1",
     "tailwindcss": "^2.0.1",
     "twin.macro": "^2.0.6",
