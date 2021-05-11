@@ -1,11 +1,12 @@
 import React, { useRef } from 'react'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import Head from 'next/head'
 import tw from 'twin.macro'
 import { Button } from '@/components/'
 import Cookies from 'cookies'
 import { randomBytes } from 'crypto'
 import toast, { Toaster } from 'react-hot-toast'
+import axios from 'axios'
 
 export async function getServerSideProps({ req, res }) {
   const cookies = new Cookies(req, res)
@@ -13,7 +14,7 @@ export async function getServerSideProps({ req, res }) {
   res.setHeader('Cache-Control', 'no-cache')
 
   cookies.set('csrf', csrf, {
-    httpOnly: true // true by default
+    httpOnly: false // true by default
   })
 
   return {
@@ -30,13 +31,11 @@ const AuthPage = ({ csrf }) => {
   const csrfInput = useRef()
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-
     const username = usernameInput.current.value
     const password = passwordInput.current.value
     const csrf = csrfInput.current.value
 
-    const response = await fetch('/api/sessions', {
+   const response = await fetch('/api/sessions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password, csrf })

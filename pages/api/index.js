@@ -11,16 +11,11 @@ export default async function handler(req, res) {
     req.cookies.csrf = randomBytes(100).toString('base64')
   }
 
-  res.statusCode = 200
-
   if (req.method === 'POST') {
     if (req.body.csrf && req.body.csrf === req.cookies.csrf) {
       await supabase.from('ngobrolin_data').insert([{ quote: req.body.quote }])
-      res.send(JSON.stringify(req.body))
+      res.statusCode = 200
     }
-
-    res.statusCode = 403
-
     res.send(`<p style="font-size: 4rem; color: red;">
                      <strong>CSRF Token is not valid.</strong>
                      </p>`)
@@ -29,7 +24,7 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     const content = await supabase
       .from('ngobrolin_data')
-      .select('quote')
+      .select('quote, quote_by')
       .eq('is_approved', true)
 
     res.statusCode = 200

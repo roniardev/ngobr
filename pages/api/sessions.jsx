@@ -15,12 +15,13 @@ export default withIronSession(
 
       if (
         username === VALID_USERNAME &&
-        password === VALID_PASSWORD &&
-        req.cookies.csrf === req.body.csrf
+        password === VALID_PASSWORD
+        //  &&
+        // req.cookies.csrf === req.body.csrf
       ) {
-        req.session.set('user', { username })
+        await req.session.set('user', { username })
         await req.session.save()
-        return res.status(201).send('')
+        return res.status(200).send('success')
       }
 
       return res.status(403).send('login Gagal')
@@ -34,7 +35,7 @@ export default withIronSession(
 
     return res.status(404).send('Not Found')
   },
-  {
+ {
     cookieName: 'AUTH_COOKIE',
     cookieOptions: {
       secure: process.env.NODE_ENV === 'production' ? true : false
