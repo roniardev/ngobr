@@ -25,7 +25,8 @@ const Modal = (props) => {
       url: '/api',
       data: {
         quote: quote,
-        csrf: csrf
+        csrf: csrf,
+        quote_by: quote_by
       }
     }).then(() => {
       toast.success('Topik obrolan berhasil ditambah')
@@ -69,6 +70,17 @@ const Modal = (props) => {
                           id="quote"
                           type="text"
                           ref={register({ required: true })}
+                          tw="shadow-lg rounded-md px-2 py-1 border-b-4 border-green-300 bg-green-200 pt-1 w-full"
+                        />
+                        <label tw="font-bold text-base text-gray-900 text-lg md:text-xl">
+                          Saran dari...
+                        </label>
+                        <input
+                          name="quote_by"
+                          id="quote_by"
+                          type="text"
+                          ref={register()}
+                          placeholder="default: anonimous"
                           tw="shadow-lg rounded-md px-2 py-1 border-b-4 border-green-300 bg-green-200 pt-1 w-full"
                         />
                         {errors.quote && errors.quote.type == 'required' && (
