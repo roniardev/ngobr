@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     if (req.body.csrf && req.body.csrf === req.cookies.csrf) {
-      await supabase.from('ngobrolin_data').insert([{ quote: req.body.quote }])
+      await supabase.from('ngobrolin_data').insert([{ quote: req.body.quote, quote_by: req.body.quote_by }])
       res.statusCode = 200
     }
     res.send(`<p style="font-size: 4rem; color: red;">
