@@ -60,7 +60,7 @@ export default function Table(props) {
         onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
           return axios({
               method: 'patch',
-              url: 'http://localhost:3000/api/admin',
+              url: '/api/admin',
               data: {
                 val: newValue,
                 id: rowData.id
@@ -73,12 +73,12 @@ export default function Table(props) {
       data={props.quote}
       actions={[
         {
-          icon: 'save',
-          tooltip: 'Approve',
+          icon: tableIcons.Check,
+          tooltip: 'Approved',
           onClick: (event, rowData) => {
             axios({
               method: 'put',
-              url: 'http://localhost:3000/api/admin',
+              url: '/api/admin',
               data: {
                 val: !rowData.is_approved,
                 id: rowData.id
@@ -89,13 +89,13 @@ export default function Table(props) {
           }
         },
         (rowData) => ({
-          icon: 'delete',
+          icon: tableIcons.Delete,
           tooltip: 'Delete User',
           onClick: async (event, rowData) => {
             confirm('You want to delete ' + rowData.quote)
             axios({
               method: 'delete',
-              url: 'http://localhost:3000/api/admin',
+              url: '/api/admin',
               data: {
                 val: rowData.id
               }

@@ -69,9 +69,28 @@ const Modal = (props) => {
                           name="quote"
                           id="quote"
                           type="text"
-                          ref={register({ required: true })}
+                          ref={register({
+                            required: true,
+                            maxLength: {
+                              value: 35,
+                              message: 'maksimal 40 kata'
+                            },
+                            minLength: { value: 11, message: 'minimal 11 kata' }
+                          })}
                           tw="shadow-lg rounded-md px-2 py-1 border-b-4 border-green-300 bg-green-200 pt-1 w-full"
                         />
+                        {errors.quote && errors.quote.type == 'required' && (
+                          <p tw="text-red-500 text-sm">
+                            🚨 Nggak boleh kosong!
+                          </p>
+                        )}
+                        {errors.quote && errors.quote.type == 'minLength' && (
+                          <p tw="text-red-500 text-sm">🚨 Minimal 11 kata!</p>
+                        )}
+                        {errors.quote && errors.quote.type == 'maxLength' && (
+                          <p tw="text-red-500 text-sm">🚨 Maksimal 35 kata!</p>
+                        )}
+
                         <label tw="font-bold text-base text-gray-900 text-lg md:text-xl">
                           Saran dari...
                         </label>
@@ -83,11 +102,6 @@ const Modal = (props) => {
                           placeholder="default: anonimous"
                           tw="shadow-lg rounded-md px-2 py-1 border-b-4 border-green-300 bg-green-200 pt-1 w-full"
                         />
-                        {errors.quote && errors.quote.type == 'required' && (
-                          <p tw="text-red-500 text-sm">
-                            🚨 Nggak boleh kosong!
-                          </p>
-                        )}
                         <Button
                           isSecondary
                           type="submit"
