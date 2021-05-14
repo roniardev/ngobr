@@ -114,6 +114,7 @@ const App = ({ post, csrf }) => {
               </button>
             </div>
             <div tw="flex flex-col justify-center h-full space-y-8 items-center w-3/5 ">
+              <p tw="text-center font-bold capitalize text-xl md:text-2xl dark:text-white">Saran topik obrolan : </p>
               <section tw="flex flex-row space-x-4 items-center">
                 <h1 tw="capitalize font-semibold text-xl md:text-3xl border-2 py-4 px-2 border-green-600 shadow-md dark:text-white">
                   "{post.data[quoteIndex].quote}"
