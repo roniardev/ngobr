@@ -53,23 +53,24 @@ export default function Table(props) {
       columns={[
         { title: 'id', field: 'id', editable: 'never' },
         { title: 'quote', field: 'quote', editable: 'always' },
+        { title: 'author', field: 'quote_by', editable: 'never' },
         { title: 'status', field: 'is_approved', editable: 'never' }
       ]}
-    cellEditable={{
+      cellEditable={{
         cellStyle: {},
         onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
           return axios({
-              method: 'patch',
-              url: '/api/admin',
-              data: {
-                val: newValue,
-                id: rowData.id
-              }
-            }).then(() => {
-              alert(`Update  quote: ${rowData.quote}`)
-            })
+            method: 'patch',
+            url: '/api/admin',
+            data: {
+              val: newValue,
+              id: rowData.id
+            }
+          }).then(() => {
+            alert(`Update  quote: ${rowData.quote}`)
+          })
         }
-    }}
+      }}
       data={props.quote}
       actions={[
         {

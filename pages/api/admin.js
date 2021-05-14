@@ -34,7 +34,7 @@ export default withIronSession(
         const id = req.body.id
         await supabase
           .from('ngobrolin_data')
-          .update({ quote: val })
+          .update({ quote : val })
           .match({ id: id })
         res.statusCode = 200
         res.send('Update quote approved')
