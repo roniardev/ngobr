@@ -27,7 +27,7 @@ export async function getServerSideProps({ req, res }) {
     httpOnly: true // true by default
   })
 
-  const data = await fetch('https://ngobr.evl.pink/api')
+  const data = await fetch('https://ngobr.ron.my.id/api')
   const post = await data.json()
   return {
     props: {
@@ -90,7 +90,7 @@ const App = ({ post, csrf }) => {
         <meta property="og:site_name" content="Ngobr" />
         <meta property="og:locale" content="id" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ngobr.evl.pink" />
+        <meta property="og:url" content="https://ngobr.ron.my.id" />
         <meta property="og:image" content="/images/og-image.png" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -114,7 +114,9 @@ const App = ({ post, csrf }) => {
               </button>
             </div>
             <div tw="flex flex-col justify-center h-full space-y-8 items-center w-3/5 ">
-              <p tw="text-center font-bold capitalize text-xl md:text-2xl dark:text-white">Saran topik obrolan : </p>
+              <p tw="text-center font-bold capitalize text-xl md:text-2xl dark:text-white">
+                Saran topik obrolan :{' '}
+              </p>
               <section tw="flex flex-row space-x-4 items-center">
                 <h1 tw="capitalize font-semibold text-xl md:text-3xl border-2 py-4 px-2 border-green-600 shadow-md dark:text-white">
                   "{post.data[quoteIndex].quote}"
@@ -123,7 +125,9 @@ const App = ({ post, csrf }) => {
                   <span tw="dark:text-white">+</span>
                 </Button>
               </section>
-                  <p tw="text-base md:text-lg dark:text-white"><b> Saran dari : </b> {post.data[quoteIndex].quote_by}</p>
+              <p tw="text-base md:text-lg dark:text-white">
+                <b> Saran dari : </b> {post.data[quoteIndex].quote_by}
+              </p>
               <Button isPrimary onClick={() => nextQuote()}>
                 <span tw="text-lg md:text-xl py-2 font-medium">Ganti</span>
               </Button>
