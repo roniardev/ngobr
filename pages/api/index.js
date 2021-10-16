@@ -7,13 +7,15 @@ const supabaseKey = process.env.SUPABASE_KEY
 export default async function handler(req, res) {
   const supabase = await createClient(supabaseUrl, supabaseKey)
 
-  if (req.cookies.csrf === undefined) {
+  if (req.cookies?.csrf === undefined) {
     req.cookies.csrf = randomBytes(100).toString('base64')
   }
 
   if (req.method === 'POST') {
-    if (req.body.csrf && req.body.csrf === req.cookies.csrf) {
-      await supabase.from('ngobrolin_data').insert([{ quote: req.body.quote, quote_by: req.body.quote_by }])
+    if (req.body?.csrf && req.body?.csrf === req.cookies?.csrf) {
+      await supabase
+        .from('ngobrolin_data')
+        .insert([{ quote: req.body?.quote, quote_by: req.body?.quote_by }])
       res.statusCode = 200
     }
     res.send(`<p style="font-size: 4rem; color: red;">
@@ -29,6 +31,6 @@ export default async function handler(req, res) {
 
     res.statusCode = 200
     res.setHeader('Content-Type', 'application/json')
-    res.send(JSON.stringify({ data: content.data }))
+    res.send(JSON.stringify({ data: content?.data }))
   }
 }

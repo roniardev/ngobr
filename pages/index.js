@@ -119,14 +119,14 @@ const App = ({ post, csrf }) => {
               </p>
               <section tw="flex flex-row space-x-4 items-center">
                 <h1 tw="capitalize font-semibold text-xl md:text-3xl border-2 py-4 px-2 border-green-600 shadow-md dark:text-white">
-                  "{post.data[quoteIndex].quote}"
+                  "{post?.data[quoteIndex]?.quote}"
                 </h1>
                 <Button onClick={toggleMain} aria-label="add-quote">
                   <span tw="dark:text-white">+</span>
                 </Button>
               </section>
               <p tw="text-base md:text-lg dark:text-white">
-                <b> Saran dari : </b> {post.data[quoteIndex].quote_by}
+                <b> Saran dari : </b> {post?.data[quoteIndex]?.quote_by}
               </p>
               <Button isPrimary onClick={() => nextQuote()}>
                 <span tw="text-lg md:text-xl py-2 font-medium">Ganti</span>
